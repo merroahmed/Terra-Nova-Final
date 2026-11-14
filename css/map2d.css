@@ -1,0 +1,31 @@
+/* Terra Nova — 2D map switch (additive). Uses the existing colour tokens. */
+.globe{position:relative}
+.tn2d-bar{position:absolute;z-index:6;top:12px;left:50%;transform:translateX(-50%);display:flex;gap:4px;padding:4px;border-radius:999px;background:rgba(5,6,20,.88);border:1px solid var(--line)}
+.tn2d-bar button{padding:8px 16px;border:0;border-radius:999px;background:transparent;color:var(--ink);font:600 13px/1 var(--f-body);cursor:pointer;white-space:nowrap;transition:background .2s,color .2s}
+.tn2d-bar button:hover{background:rgba(255,255,255,.1)}
+.tn2d-bar button.is-on{background:var(--lilac);color:#0a0820}
+.tn2d{position:absolute;inset:0;z-index:5;background:#0c0f26}
+.tn2d[hidden]{display:none}
+/* mapbox-gl.css sets .mapboxgl-map{position:relative}, which collapsed the map to height 0 — force the size */
+.tn2d .tn2d__map,.tn2d .tn2d__map.mapboxgl-map{position:absolute!important;top:0;left:0;right:0;bottom:0;width:100%!important;height:100%!important}
+.tn2d .mapboxgl-canvas{outline:0}
+.tn2d__state{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;text-align:center;padding:20px;background:#0c0f26;color:var(--muted)}
+.tn2d__state[hidden]{display:none}
+.tn2d__style{position:absolute;z-index:4;left:12px;bottom:34px;display:flex;gap:4px;padding:4px;border-radius:12px;background:rgba(5,6,20,.88);border:1px solid var(--line)}
+.tn2d__style button{padding:6px 12px;border:0;border-radius:8px;background:transparent;color:var(--ink);font:600 12px/1 var(--f-body);cursor:pointer}
+.tn2d__style button.is-on{background:var(--violet);color:#0a0820}
+.tn2d-pin{width:26px;height:26px;padding:0;border:0;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.tn2d-pin i{width:16px;height:16px;border-radius:50%;background:var(--c);border:2.5px solid rgba(5,6,20,.9);box-shadow:0 0 0 2px rgba(255,255,255,.55),0 2px 8px rgba(0,0,0,.6);transition:transform .2s}
+.tn2d-pin:hover i,.tn2d-pin.is-on i{transform:scale(1.5);box-shadow:0 0 0 3px #fff,0 2px 10px rgba(0,0,0,.7)}
+.tn2d-pop{display:flex;flex-direction:column;gap:3px;color:#0d0f24;font-family:var(--f-body);min-width:150px}
+.tn2d-pop b{font-size:14px;line-height:1.25}.tn2d-pop small{font-size:12px;color:#55586f}
+.tn2d-pop button{align-self:flex-start;margin-top:6px;padding:6px 12px;border-radius:999px;border:0;background:#0b1450;color:#fff;font:600 12px/1 var(--f-body);cursor:pointer}
+.tn2d-km .mapboxgl-popup-content{font:700 13px var(--f-body);color:#0d0f24;padding:6px 10px}
+/* while 2D is on, the 3D globe's own controls are hidden (the globe itself keeps running underneath) */
+.globe.is-2d .globe__gate,.globe.is-2d .globe__release,.globe.is-2d .globe__state{display:none!important}
+.globe .tn-legend{inset-block-start:58px}
+.globe .tn-pin{inset-block-start:98px;z-index:7}
+@media (max-width:560px){.tn2d-bar button{padding:7px 11px;font-size:12px}.tn2d__style{bottom:30px}}
+
+/* in 2D the map popup already names the place; the big card (with its scroll-down button) would cover the map */
+.globe.is-2d .tn-pin{display:none!important}
